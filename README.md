@@ -44,6 +44,8 @@ steps:
 
 1) prepare an input file [input.txt](./input.txt)
 
+> will ignore empty lines and the lines that starts with `#`.
+
 2) run the dictionary
 
 ```bash

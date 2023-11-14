@@ -47,11 +47,12 @@ def note(args):
     vocabularies = list()
     with open(args.input, "r") as f:
         vocabularies = [l.strip() for l in f.readlines()]
+        vocabularies = [v for v in vocabularies if v != "" and not v.startswith("#")]
     with open(args.output, "w") as f:
         writeline(f, f"## {args.tag}")  # title
         for v in vocabularies:
             status = execute(f, query(v))
-            print(f"Processed {v} ==> Status {status}")
+            print(f"Processed {v:20} ==> Status {status}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
