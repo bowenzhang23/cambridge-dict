@@ -18,7 +18,9 @@ def writeline(f, content):
     f.write(f"{content}\n\n")
 
 
-def execute(f, result):
+def execute(f, v):
+    result = query(v)
+    
     title: list = result["title"]
     explain: list = result["explain"]
     explain_cn: list = result["explain_cn"]
@@ -26,8 +28,12 @@ def execute(f, result):
     example_cn: list = result["example_cn"]
     phrase: list = result["phrase"]
     audio_src: list = result["audio_src"]
-    if len(title) < 1:
+
+    if len(title) < 1 and len(explain) < 1:
         return False
+    elif len(title) < 1:
+        title = [v.replace("-", " ")]
+        
     writeline(f, f"### {title[0]}")
     for src in audio_src:
         if "uk" in src:
@@ -51,7 +57,7 @@ def note(args):
     with open(args.output, "w") as f:
         writeline(f, f"## {args.tag}")  # title
         for v in vocabularies:
-            status = execute(f, query(v))
+            status = execute(f, v)
             print(f"Processed {v:20} ==> Status {status}")
 
 if __name__ == "__main__":
