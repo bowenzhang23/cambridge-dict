@@ -40,10 +40,12 @@ def execute(f, v):
             writeline(f, f"{audio_html(src)}")
     for i, e in enumerate(explain):
         writeline(f, f"`Meaning:` {e}")
-        writeline(f, f"`释义：` {explain_cn[i]}")
+        if i < len(explain_cn):
+            writeline(f, f"`释义：` {explain_cn[i]}")
     for i, e in enumerate(example):
         writeline(f, f"*{e}*")
-        writeline(f, f"*{example_cn[i]}*")
+        if i < len(example_cn):
+            writeline(f, f"*{example_cn[i]}*")
     for p in phrase:
         writeline(f, f"**{p}**")
     return True
